@@ -49,3 +49,19 @@ function getRandomRGBA() {
 		')'
 	].join('');
 }
+var socket = io();
+// listen to the server for the `add-circle` event
+socket.on('add-circle', function(data) {
+	console.log(data);
+});
+
+circles.addEventListener('click', function(evt) {
+	// replace current line of code with this code
+	socket.emit('add-circle', {
+		initials: initials,
+		x: evt.clientX,
+		y: evt.clientY,
+		dia: randomBetween(10, 100),
+		rgba: getRandomRGBA()
+	});
+});
